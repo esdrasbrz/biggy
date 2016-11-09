@@ -11,7 +11,7 @@
 /**
  * Important defines for all functions that manipulate the bits
  */
-#define BLOCK_SIZE 8 // umber of bits on all position of num array.
+#define BLOCK_SIZE 8 // number of bits on all position of num array.
 
 // 8 bits mask representations
 #define LEFT_MASK 240 // 11110000
@@ -41,7 +41,7 @@ typedef struct {
  * This func create a BiggyInt object and returns a pointer to it. The params
  * is a string with optional signal ('+' or '-').
  *
- * @param str_num - string (THE \0 IS VERY IMPORTANT!) with the number
+ * @param char *str_num - string (THE \0 IS VERY IMPORTANT!) with the number
  *
  * @return BiggyInt* - a pointer to our number representation
  */
@@ -51,8 +51,8 @@ BiggyInt* bint_create(char *str_num);
  * This func take a BiggyInt number and free all allocated memory.
  * YOU MUST CALL THIS FUNC!
  *
- * @param num - A BiggyInt pointer
+ * @param BiggyInt *num - A BiggyInt pointer
  */
-void bint_free(BiggyInt* num);
+void bint_free(BiggyInt *num);
 
 #endif // BIGGY_INT_H
