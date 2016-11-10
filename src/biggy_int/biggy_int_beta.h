@@ -68,6 +68,9 @@ BiggyInt* bint_create(char *str_num);
  *
  * @param BiggyInt *num - A BiggyInt pointer
  */
-void bint_free(BiggyInt *num);
+void bint_free(BiggyInt *num){
+    free(num->num);//frees the only vector on num
+    free(num);//free the structure
+}
 
 #endif // BIGGY_INT_H
