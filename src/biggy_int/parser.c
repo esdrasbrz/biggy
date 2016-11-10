@@ -10,30 +10,21 @@
 
 /*
 * This function
-** receive a raw string (tipcaly created by the user), the pointer signal
-** returns the absolute value as a string and updates the pointer (-1 for negative and +1 for positive)
-* The string buffer must be formated as <num>, -<num> or +<num> where num is some natural number or 0
+** receives a raw string (tipcaly created by the user) and the pointer signal
+** returns 1 if the received string has a signal or 0 if don't, also it updates the pointer (-1 for negative and +1 for positive)
+* The string buffer must be formated as <num>, -<num> or +<num> where <num> is some natural number or 0
 */
 
-char* _bint_parseStrInput(char *buffer, int *signal) {
-  //updates the pointer
-  int i_signal = 0;//this guy makes sure that we're copying just digits to the returned string
-  if(buffer[0] == '-'){
+int _bint_parseStrInput(char *buffer, int *signal) {
+  //checks if there's a plus minus signal
+  if(buffer[0] == '+'){
+    *signal = 1;//update the pointer
+    return 1;//if there's a signal, we'll have to jump it during copying
+  }
+  else if(buffer[0] == '-'){
     *signal = -1;
-    i_signal = 1;//if there's a signal, we'll have to jump it during copying
-  }
-  else if(buffer[0] == '+'){
-    *signal = 1;
-    i_signal = 1;
+    return 1;
   }
 
-  char *str_aux;
-  str_aux = malloc((strlen(buffer) - i_signal)*sizeof(char));//just the right quantity of memory
-
-  //standard copying loop
-  for(i = i_signal; i < strlen(*buffer); i++){
-    str_aux[i] = buffer[i];
-  }
-
-  return str_aux;
+  return 0;
 }
