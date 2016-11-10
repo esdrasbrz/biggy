@@ -1,17 +1,20 @@
+#!/bin/bash
+
+SOURCE_DIRS=(../src/biggy_int)
+INCLUDE_DIR=/usr/local/include/biggy
+
 # removes biggy directory from /usr/local/include and creates a new one
-rm -rf /usr/local/include/biggy
-mkdir /usr/local/include/biggy
+rm -rf $INCLUDE_DIR
+mkdir $INCLUDE_DIR
 
-# switch to biggy_int directory
-cd ../src/biggy_int/
-
-# Compile the source code to .o binary output
-gcc -c *.c
-# copy the headers to /usr/local/include
-cp *.h /usr/local/include/biggy
-
-# returns to build dir
-cd ../../build
+# switch to source directories
+for dir in ${SOURCE_DIRS[@]}
+do
+    # Compile the source code to .o binary output
+    gcc -c $dir/*.c
+    # copy the headers to /usr/local/include
+    cp $dir/*.h $INCLUDE_DIR
+done
 
 # share .o files to .so library
-gcc ../src/biggy_int/*.o -shared -lm -o libbiggy.so
+gcc ./*.o -shared -lm -o libbiggy.so
