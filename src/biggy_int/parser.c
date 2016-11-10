@@ -22,7 +22,7 @@ char* _bint_parseStrInput(char *buffer, int *signal) {
     *signal = -1;
     i_signal = 1;//if there's a signal, we'll have to jump it during copying
   }
-  else if(buffer[0] == '-'){
+  else if(buffer[0] == '+'){
     *signal = 1;
     i_signal = 1;
   }
