@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "biggy_int.h"
+#include <biggy/biggy_int.h>
 
 int main(void) {
     return 0;
