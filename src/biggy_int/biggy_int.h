@@ -48,6 +48,9 @@ typedef struct {
 int _bint_parseStrInput(char *buffer, int *signal);
 
 
+// ********************** //
+
+
 /**
  * BiggyInt brute manipulations. Functions code in biggy_int.c
  */
@@ -102,5 +105,31 @@ void bint_free(BiggyInt *num);
  * @param BiggyInt *num - pointer to number that will be printed
  */
 void bint_print(BiggyInt *num);
+
+// ***************** //
+
+/**
+ * Casts functions. Code on casts.c file
+ */
+
+/**
+ * This func receives an unsigned number of 8 bits (0, 1, 2, 3, ...) and
+ * returns the char ('0', '1', '2', '3', ...).
+ *
+ * @param uint8_t num - The number to cast
+ * 
+ * @return char - Correspondent char
+ */
+char _bint_num2char(uint8_t num);
+
+/**
+ * This func receives a char number ('0', '1', '2', '3', ...) and
+ * returns an unsigned int of 8 bits (0, 1, 2, 3, ...).
+ *
+ * @param char c_num - The char to cast
+ * 
+ * @return uint8_t - Correspondent unsigned number
+ */
+uint8_t _bint_char2num(char c_num);
 
 #endif // BIGGY_INT_H

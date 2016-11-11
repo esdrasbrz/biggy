@@ -86,7 +86,7 @@ BiggyInt* bint_create(char *str_num) {
     // loop on str_num and put the numbers on num->num array
     for (i_num = 0; i_num < num->dec_len; i_num++) {
         // puts each figure on array
-        _bint_putbits(num->num, str_num[i_str_num] - '0', i_num);
+        _bint_putbits(num->num, _bint_char2num(str_num[i_str_num]), i_num);
 
         i_str_num++;
     }
@@ -118,7 +118,7 @@ void bint_print(BiggyInt *num) {
     num->signal == 1 ? putchar('+') : putchar('-');
     for (i = 0; i < num->dec_len; i++) {
         // prints the number
-        putchar(_bint_getbits(num->num, i) + '0');
+        putchar(_bint_num2char(_bint_getbits(num->num, i)));
     }
 
     putchar('\n');
