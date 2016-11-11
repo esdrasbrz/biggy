@@ -37,7 +37,7 @@ typedef struct {
  */
 
 /**
- * This private func returns an integer with 1 if buffer has a singnal and
+ * This private func returns an integer with 1 if buffer has a signal and
  * 0 if it hasn't.
  *
  * @param char *buffer - Initial buffer.
