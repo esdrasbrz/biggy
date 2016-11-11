@@ -16,15 +16,15 @@
 */
 
 int _bint_parseStrInput(char *buffer, int *signal) {
-  //checks if there's a plus minus signal
-  if(buffer[0] == '+'){
-    *signal = 1;//update the pointer
-    return 1;//if there's a signal, we'll have to jump it during copying
-  }
-  else if(buffer[0] == '-'){
-    *signal = -1;
-    return 1;
-  }
+    // checks if there's a plus minus signal
+    if(buffer[0] == '+'){
+        *signal = 1;//update the pointer
+        return 1;//if there's a signal, we'll have to jump it during copying
+    }
+    else if(buffer[0] == '-'){
+        *signal = -1;
+        return 1;
+    }
 
-  return 0;
+    return 0;
 }

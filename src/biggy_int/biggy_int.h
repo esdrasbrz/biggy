@@ -37,15 +37,15 @@ typedef struct {
  */
 
 /**
- * This private func returns a new string with just number representation,
- * removing all useless chars. It returns signal on *signal pointer param.
+ * This private func returns an integer with 1 if buffer has a singnal and
+ * 0 if it hasn't.
  *
  * @param char *buffer - Initial buffer.
  * @param int *signal - Pointer with mem address of signal on BiggyInt structure.
  *
- * @return char* - The output number in str
+ * @return int - The output boolean
  */
-char* _bint_parseStrInput(char *buffer, int *signal);
+int _bint_parseStrInput(char *buffer, int *signal);
 
 
 /**

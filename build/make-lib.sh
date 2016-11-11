@@ -18,3 +18,6 @@ done
 
 # share .o files to .so library
 gcc ./*.o -shared -lm -o libbiggy.so
+
+# export the library path
+export LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH
