@@ -11,7 +11,7 @@ mkdir $INCLUDE_DIR
 for dir in ${SOURCE_DIRS[@]}
 do
     # Compile the source code to .o binary output
-    gcc -c $dir/*.c
+    gcc -fPIC -c $dir/*.c
     # copy the headers to /usr/local/include
     cp $dir/*.h $INCLUDE_DIR
 done

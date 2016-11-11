@@ -53,6 +53,19 @@ int _bint_parseStrInput(char *buffer, int *signal);
  */
 
 /**
+ * Private function to put a char number on absolute position in 4 bits array
+ * representation.
+ *
+ * BE CAREFUL, because this funcs assume that pos = 0 is the firsts 4 bits of array[0]
+ * and pos = 1 is the lasts 4 bits of array[0], pos = 2 the firsts 4 bits of array[1] ....
+ *
+ * @param uint8_t* array - The 4 bits array representation
+ * @param char num - The number to put
+ * @param pos - The position of char num on uint8_t *array
+ */
+void _bint_putbits(uint8_t *array, char num, int pos);
+
+/**
  * This func creates a BiggyInt object and returns a pointer to it. The params
  * is a string with optional signal ('+' or '-').
  *
