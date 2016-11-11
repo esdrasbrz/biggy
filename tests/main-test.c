@@ -9,11 +9,16 @@
 
 int main(void) {
     BiggyInt* num;
-    char str_num[100];
+    char str_num[1000];
 
     scanf("%s", str_num);
 
     num = bint_create(str_num);
+
+    puts("The number is:");
+    bint_print(num);
+
+    printf("\nYour length: %d\n", num->dec_len);
 
     bint_free(num);
 

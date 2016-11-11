@@ -11,13 +11,13 @@ mkdir $INCLUDE_DIR
 for dir in ${SOURCE_DIRS[@]}
 do
     # Compile the source code to .o binary output
-    gcc -fPIC -c $dir/*.c
+    gcc -fPIC -g -Wall -c $dir/*.c
     # copy the headers to /usr/local/include
     cp $dir/*.h $INCLUDE_DIR
 done
 
 # share .o files to .so library
-gcc ./*.o -shared -lm -o libbiggy.so
+gcc ./*.o -shared -lm -g -Wall -o libbiggy.so
 
 # export the library path
 export LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH

@@ -4,6 +4,7 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "biggy_int.h"
@@ -15,19 +16,41 @@ void _bint_putbits(uint8_t *array, char num, int pos) {
     int pos_array = pos / 2; // position of num on array 8 bits
 
     // verify if is the firsts 4 bits or the lasts
-    if (pos % 2 == 0) {
+    if (pos % 2 == 0) { // firsts
         // set 0 on firsts bits, with right mask
         array[pos_array] &= RIGHT_MASK;
 
         // left shift on num
         num <<= 4;
-    } else {
+    } else { // lasts
         // set 0 on lasts bits, with left mask
         array[pos_array] &= LEFT_MASK;
     }
 
     // assign the value
     array[pos_array] |= num;
+}
+
+/**
+ * Private function to get the number on 4 bits array
+ */
+uint8_t _bint_getbits(uint8_t *array, int pos) {
+    int pos_array = pos / 2; // position of num on array 8 bits
+    int num;
+
+    // verify if is the firsts 4 bits or the lasts
+    if (pos % 2 == 0) { // firsts
+        // get num with left mask
+        num = array[pos_array] & LEFT_MASK;
+
+        // shift the num for right position (assuming decimal representation)
+        num >>= 4;
+    } else { // lasts
+        // get num with right mask
+        num = array[pos_array] & RIGHT_MASK;
+    }
+
+    return num;
 }
 
 
@@ -58,10 +81,10 @@ BiggyInt* bint_create(char *str_num) {
     num = (BiggyInt*) malloc(sizeof(BiggyInt));
     num->num = (uint8_t*) malloc(((len + 1) / 2) * sizeof(uint8_t));
     num->dec_len = len;
-
+    num->signal = signal;
 
     // loop on str_num and put the numbers on num->num array
-    for (i_num = 0; i_num < (num->dec_len + 1) / 2; i_num++) {
+    for (i_num = 0; i_num < num->dec_len; i_num++) {
         // puts each figure on array
         _bint_putbits(num->num, str_num[i_str_num] - '0', i_num);
 
@@ -83,4 +106,20 @@ BiggyInt* bint_create(char *str_num) {
 void bint_free(BiggyInt *num){
     free(num->num);//frees the only vector on num
     free(num);//free the structure
+}
+
+/**
+ * Print the number
+ */
+void bint_print(BiggyInt *num) {
+    int i;
+    
+    // prints the signal
+    num->signal == 1 ? putchar('+') : putchar('-');
+    for (i = 0; i < num->dec_len; i++) {
+        // prints the number
+        putchar(_bint_getbits(num->num, i) + '0');
+    }
+
+    putchar('\n');
 }

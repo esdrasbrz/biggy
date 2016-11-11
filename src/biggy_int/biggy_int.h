@@ -66,6 +66,19 @@ int _bint_parseStrInput(char *buffer, int *signal);
 void _bint_putbits(uint8_t *array, char num, int pos);
 
 /**
+ * Private function to get a char (uint8_t) number of absolute position in 4 bits array
+ * representation.
+ *
+ * BE CAREFUL, the int pos parameter has the same representation of _bint_putbits func.
+ *
+ * @param uint8_t* array - The 4 bits array representation
+ * @param int pos - The position of uint8_t *array with 4 bits.
+ *
+ * @return uint8_t - The number on array, at int pos position.
+ */
+uint8_t _bint_getbits(uint8_t *array, int pos);
+
+/**
  * This func creates a BiggyInt object and returns a pointer to it. The params
  * is a string with optional signal ('+' or '-').
  *
@@ -82,5 +95,12 @@ BiggyInt* bint_create(char *str_num);
  * @param BiggyInt *num - A BiggyInt pointer
  */
 void bint_free(BiggyInt *num);
+
+/**
+ * This func receives a BiggyInt pointer and prints the number
+ *
+ * @param BiggyInt *num - pointer to number that will be printed
+ */
+void bint_print(BiggyInt *num);
 
 #endif // BIGGY_INT_H
