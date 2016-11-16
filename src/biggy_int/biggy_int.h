@@ -32,22 +32,6 @@ typedef struct {
  * Functions
  */
 
-/**
- * BiggyInt Parsers utilities. Functions code in parser.c
- */
-
-/**
- * This private func returns an integer with 1 if buffer has a signal and
- * 0 if it hasn't.
- *
- * @param char *buffer - Initial buffer.
- * @param int *signal - Pointer with mem address of signal on BiggyInt structure.
- *
- * @return int - The output boolean
- */
-int _bint_parseStrInput(char *buffer, int *signal);
-
-
 // ********************** //
 
 
