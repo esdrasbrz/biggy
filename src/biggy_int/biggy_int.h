@@ -116,4 +116,16 @@ char _bint_num2char(uint8_t num);
  */
 uint8_t _bint_char2num(char c_num);
 
+/**
+ * This func receives a BiggyInt representation number and returns it on
+ * string. The first element, str[0], is the signal ('+' or '-') and the others
+ * are the figures of num.
+ *
+ * @param BiggyInt *num - pointer to input number
+ *
+ * @return char* - Correspondent string of num.
+ */
+char* bint_biggy2str(BiggyInt *num);
+
+
 #endif // BIGGY_INT_H
