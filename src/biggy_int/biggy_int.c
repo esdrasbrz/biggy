@@ -60,35 +60,48 @@ uint8_t _bint_getbits(uint8_t *array, int pos) {
  */
 BiggyInt* bint_create(char *str_num) {
     BiggyInt *num; // pointer to be created
-    int signal; // int number with signal of num, -1 or 1
+    int signal = 1; // int number with signal of num, -1 or 1
     int len; // length of str_num
-    int i_str_num = 0; // initial index of str_num
-    int i_num; // initial index of num->num array
-
+    int i_str_num; // initial index of str_num
 
     // receives len and signal
     len = strlen(str_num);
-    if (!_bint_parseStrInput(str_num, &signal)) {
-        // here, the number has not signal
-        signal = 1;
-    } else {
-        // change the length and initial index
-        len--;
-        i_str_num++;
+    for (i_str_num = 0; i_str_num < len && (str_num[i_str_num] < '0' || str_num[i_str_num] > '9'); i_str_num++) {
+        if (str_num[i_str_num] == '+') {
+            signal = 1;
+            break;
+        } else if (str_num[i_str_num] == '-') {
+            signal = -1;
+            break;
+        }
     }
+    
+    // jumps the 0 on the left, e. g., 00000123 = 123.
+    for (; i_str_num < len && (str_num[i_str_num] <= '0' || str_num[i_str_num] > '9'); i_str_num++);
 
     // alloc the structures
     num = (BiggyInt*) malloc(sizeof(BiggyInt));
-    num->num = (uint8_t*) malloc(((len + 1) / 2) * sizeof(uint8_t));
-    num->dec_len = len;
-    num->signal = signal;
 
-    // loop on str_num and put the numbers on num->num array
-    for (i_num = 0; i_num < num->dec_len; i_num++) {
-        // puts each figure on array
-        _bint_putbits(num->num, _bint_char2num(str_num[i_str_num]), i_num);
+    if (i_str_num == len) { // the number is NULL and it returns 0
+        num->num = (uint8_t*) malloc(sizeof(uint8_t));
+        *(num->num) = 0;
+        num->dec_len = 1;
+        num->signal = 1;
+    } else { // the number is not null, then we'll read it
+        num->num = (uint8_t*) malloc(((len - i_str_num + 1) / 2) * sizeof(uint8_t));
+        num->dec_len = 0;
+        num->signal = signal;
 
-        i_str_num++;
+        // loop on str_num and put the numbers on num->num array
+        while (i_str_num < len) {
+            // verify if the figure is valid
+            if (str_num[i_str_num] >= '0' && str_num[i_str_num] <= '9') {
+                // puts each figure on array
+                _bint_putbits(num->num, _bint_char2num(str_num[i_str_num]), num->dec_len++);
+            }
+
+            i_str_num++;
+        }
     }
 
     return num;
